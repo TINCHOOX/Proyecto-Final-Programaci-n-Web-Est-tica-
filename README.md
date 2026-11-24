@@ -4,3 +4,6 @@ Este trabajo contiene:
 -1 Archivo Css que contiene la estética del proyecto
 -1 Archivo Javascript que contiene todas las funciones, incluyendo persistencia para un carrito de compras virtual
 -1 Favicoin que se añade en "title" del html
+
+Sé que tiene mil cosas que mejorar pero este trabajo también es parte de mi camino en la carreara ;)
+
