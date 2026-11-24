@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - CompuCore</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+         <h1><a href="inicio.html" class="logo_enlace">CompuCore</a></h1>
+                        <!--Nav de todas las paginas-->
+        <nav class="nav_menu">
+            <a href="inicio.html" class="nav_item">Inicio</a>
+            <a href="index.html" class="nav_item">Tienda</a>
+            <a href="catalogo.html" class="nav_item">Catálogo</a>
+            <a href="ofertas.html" class="nav_item">Ofertas</a>
+            <a href="nosotros.html" class="nav_item">Nosotros</a>
+            <a href="faq.html" class="nav_item">FAQ</a>
+            <a href="formulario.html" class="nav_item active">Contacto</a>
+                        <!--Fin nav de todas las paginas-->
+        </nav>
+
+        <div class="icono_carrito_wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="50" height="50" class="icono_carrito" onclick="window.location='index.html'">
+                <path d="M53.5 245.1L110.3 131.4C121.2 109.7 143.3 96 167.6 96L472.5 96C496.7 96 518.9 109.7 529.7 131.4L586.5 245.1C590.1 252.3 592 260.2 592 268.3C592 295.6 570.8 318 544 319.9L544 512C544 529.7 529.7 544 512 544C494.3 544 480 529.7 480 512L480 320L384 320L384 496C384 522.5 362.5 544 336 544L144 544C117.5 544 96 522.5 96 496L96 319.9C69.2 318 48 295.6 48 268.3C48 260.3 49.9 252.3 53.5 245.1zM160 320L160 432C160 440.8 167.2 448 176 448L304 448C312.8 448 320 440.8 320 432L320 320L160 320z"/>
+            </svg>
+            <div class="burbuja_cantidad">
+                <span id="contador-productos">0</span>
+            </div>    </div>
+    </header>
+
+    <main class="contenido_pagina">
+                                     <!---->
+        <div class="encabezado_seccion">
+            <span class="etiqueta_seccion">Estamos para ayudarte con cualquier duda</span>
+            <h2 class="titulo_seccion">Contacto</h2>
+            <p class="subtitulo_seccion">Envianos tu consulta y te respondemos en menos de 24 horas si tenemos ganas de laburar.</p>
+        </div>
+
+        <div class="layout_contacto">
+                                 <!--Quejas del cliente-->
+            <form class="formulario_contacto" id="contactForm" novalidate>
+
+                <div class="fila_campos">
+                    <div class="campo_grupo">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                        <span class="mensaje_error" id="error-nombre"></span>
+                    </div>
+                    <div class="campo_grupo">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" name="apellido" placeholder="Tu apellido" required>
+                        <span class="mensaje_error" id="error-apellido"></span>
+                    </div>
+                </div>
+
+                <div class="campo_grupo">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                    <span class="mensaje_error" id="error-email"></span>
+                </div>
+
+                <div class="campo_grupo">
+                    <label for="telefono">Teléfono <span class="etiqueta_opcional" id="telefono-opcional">(opcional)</span></label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="+54 299 000-0000">
+                    <span class="mensaje_error" id="error-telefono"></span>
+                </div>
+
+                <div class="campo_grupo">
+                    <label>¿Cómo preferís que te contactemos?</label>
+                    <div class="opciones_radio">
+                        <label class="opcion_radio">
+                            <input type="radio" name="contacto_preferido" value="email" checked>
+                            Por email
+                        </label>
+                        <label class="opcion_radio">
+                            <input type="radio" name="contacto_preferido" value="telefono">
+                            Por teléfono
+                        </label>
+                    </div>
+                </div>
+
+                <div class="campo_grupo">
+                                <!--Opciones de posibles quejas-->
+                    <label for="asunto">Asunto</label>
+                    <select id="asunto" name="asunto" required>
+                        <option value="" disabled selected>Seleccioná un tema</option>
+                        <option value="compra">Consulta sobre un producto</option>
+                        <option value="envio">Estado de envío</option>
+                        <option value="devolucion">Devolución o cambio</option>
+                        <option value="tecnico">Soporte técnico</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <span class="mensaje_error" id="error-asunto"></span>
+                </div>
+                                <!--Fin opciones quejas-->
+
+                <div class="campo_grupo">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" placeholder="Contanos en qué podemos ayudarte..." required></textarea>
+                    <span class="mensaje_error" id="error-mensaje"></span>
+                </div>
+
+                <div class="campo_grupo">
+                    <label class="opcion_checkbox" for="terminos">
+                        <input type="checkbox" id="terminos" name="terminos">
+                        Acepto los términos y condiciones y la política de privacidad.
+                    </label>
+                    <span class="mensaje_error" id="error-terminos"></span>
+                </div>
+
+                <button type="submit" class="btn_enviar">Enviar mensaje</button>
+                             <!--Fin quejas cliente-->
+            </form>
+                             <!--Informacion de contacto (Lateral)-->
+            <aside class="info_lateral">
+                <div class="tarjeta_info">
+                    <div class="icono_info">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>ventas@compucore.com.ar</p>
+                    </div>
+                </div>
+
+                <div class="tarjeta_info">
+                    <div class="icono_info">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Teléfono</h3>
+                        <p>+54 299 422-0000</p>
+                    </div>
+                </div>
+
+                <div class="tarjeta_info">
+                    <div class="icono_info">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Horario de atención</h3>
+                        <p>Lun–Vie 9:00 – 18:00</p>
+                        <p>Sáb 9:00 – 13:00</p>
+                    </div>
+                </div>
+
+                <div class="tarjeta_info">
+                    <div class="icono_info">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Dirección</h3>
+                        <p>Av. Argentina 1234, Neuquén</p>
+                    </div>
+                </div>
+            </aside>
+                             <!--Fin informacion de contacto -->
+        </div>
+                             <!--Mini calculadora en Contacto-->
+        <section class="calculadora_envio">
+            <div class="encabezado_seccion" style="margin-bottom: 28px;">
+                <span class="etiqueta_seccion">Estimación rápida</span>
+                <h2 class="titulo_seccion" style="font-size: 26px;">Calculá tu envío</h2>
+                <p class="subtitulo_seccion">Una estimación de costo y tiempo de entrega según tu zona. El valor final se confirma al finalizar la compra.</p>
+            </div>
+
+            <div class="panel_calculadora">
+                <div class="controles_envio">
+                    <div class="campo_grupo">
+                        <label for="envioZona">Zona de entrega</label>
+                        <select id="envioZona">
+                            <option value="neuquen">Neuquén capital</option>
+                            <option value="patagonia">Patagonia (Río Negro, Chubut, etc.)</option>
+                            <option value="amba">Buenos Aires y AMBA</option>
+                            <option value="resto">Resto del país</option>
+                        </select>
+                    </div>
+
+                    <div class="campo_grupo">
+                        <label for="envioCantidad">Cantidad de productos</label>
+                        <input type="number" id="envioCantidad" min="1" max="20" value="1">
+                    </div>
+
+                    <div class="campo_grupo">
+                        <label for="envioTipo">Tipo de envío</label>
+                        <select id="envioTipo">
+                            <option value="estandar">Estándar</option>
+                            <option value="express">Express</option>
+                        </select>
+                    </div>
+
+                    <button type="button" class="btn_enviar" id="btnCalcularEnvio">Calcular</button>
+                </div>
+
+                <div class="resultado_envio" id="envioResultado">
+                    <p class="resultado_vacio">Completá los datos y calculá tu envío estimado.</p>
+                </div>
+            </div>
+                        <!--Fin miini calculadora en Contacto-->
+        </section>
+
+    </main>
+                                  <!--Formato del footer-->
+    <footer class="pie_pagina">
+        <div class="pie_columnas">
+            <div class="pie_marca">
+                <h2>CompuCore</h2>
+                <p>Periféricos gaming y de oficina, con envíos a todo el país desde Neuquén.</p>
+            </div>
+
+            <div class="pie_col">
+                <h4>Sitio</h4>
+                <a href="inicio.html">Inicio</a>
+                <a href="index.html">Tienda</a>
+                <a href="catalogo.html">Catálogo</a>
+                <a href="ofertas.html">Ofertas</a>
+            </div>
+
+            <div class="pie_col">
+                <h4>Ayuda</h4>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="faq.html">Preguntas frecuentes</a>
+                <a href="formulario.html">Contacto</a>
+            </div>
+
+            <div class="pie_col">
+                <h4>Contacto</h4>
+                <p>ventas@compucore.com.ar</p>
+                <p>+54 299 422-0000</p>
+                <p>Av. Argentina 1234, Neuquén</p>
+            </div>
+        </div>
+
+        <div class="pie_copy">
+            <p>© 2026 CompuCore. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="toast toast--oculto" id="toast">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        </svg>
+        <span>¡Mensaje enviado! Te respondemos pronto.</span>
+    </div>
+
+    <script src="cart.js"></script>
+    <script src="formulario.js"></script>
+    <script src="envio.js"></script>
+</body>
+
+</html>

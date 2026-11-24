@@ -1,0 +1,1346 @@
+
+/*Se utilizara para diferenciar precios de mini-info de cada producto la font-Family "JetBrains"*/
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+    /*Utilizo valores del tipo "--" para una vez llamado se aplique el estilo guardado en root*/
+    /* Paleta colores de fondo  */
+    --fondo: #121315;
+    --superficie: #1b1d20;
+    --superficie-2: #222428;
+    --superficie-3: #2a2d31;
+
+    /* Lineas y Bordeado */
+    --borde: rgba(255, 255, 255, 0.09);
+    --borde-fuerte: rgba(255, 255, 255, 0.18);
+
+    /* Textos */
+    --texto: #e8e9ea;
+    --texto-suave: rgba(232, 233, 234, 0.62);
+    --texto-tenue: rgba(232, 233, 234, 0.38);
+
+    /* Paleta de colores de items,botones y detales */
+    --acento: #4fd1d9;
+    --acento-suave: rgba(79, 209, 217, 0.12);
+    --acento-texto: #0d1011;
+
+    /* Estado */
+    --peligro: #ef4444;
+    --peligro-fondo: rgba(239, 68, 68, 0.1);
+
+    --fuente-display: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --fuente-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Globales */
+/*Para establecer como cada navegador se comporta lo reseteo a mi necesidad*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 24px;
+    font-family: var(--fuente-display);
+    color: var(--texto-suave);
+    background-color: var(--fondo);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color .25s ease, color .25s ease;
+}
+
+
+
+img {
+    max-width: 100%;
+}
+
+/* Header */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0 36px 0;
+    border-bottom: 1px solid var(--borde);
+}
+
+/* Inicio Carrito */
+
+.icono_carrito_wrap {
+    position: relative;
+}
+
+.icono_carrito {
+    width: 40px;
+    height: 40px;
+    fill: var(--texto-suave);
+    cursor: pointer;
+    transition: fill .2s;
+    display: block;
+}
+
+.icono_carrito:hover {
+    fill: var(--acento);
+}
+
+
+.burbuja_cantidad {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background-color: var(--acento);
+    color: var(--acento-texto);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-family: var(--fuente-mono);
+    font-size: 11px;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.panel_carrito {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    background-color: var(--superficie);
+    width: 380px; /* en mobile queda grande, se podria utilizar un media query para esto */
+    border: 1px solid var(--borde);
+    border-radius: 0;
+    z-index: 10;
+}
+
+.panel_carrito--cerrado {
+    display: none;
+}
+
+.icono_cerrar {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity .2s;
+    flex-shrink: 0;
+    color: var(--texto);
+}
+
+.icono_cerrar:hover {
+    opacity: 1;
+}
+
+.lista_y_cerrar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 24px;
+    border-bottom: 1px solid var(--borde);
+    gap: 12px;
+}
+
+.lista_items_carrito {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+}
+
+.fila_producto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.nombre_producto {
+    flex: 1;
+    font-weight: 600;
+    color: var(--texto);
+}
+
+.cantidad_producto {
+    color: var(--texto-tenue);
+    font-family: var(--fuente-mono);
+}
+
+.precio_producto {
+    font-weight: 700;
+    font-family: var(--fuente-mono);
+    color: var(--acento);
+}
+
+.btn_quitar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--texto-tenue);
+    font-size: 12px;
+    padding: 2px 4px;
+    transition: color .2s;
+}
+
+.btn_quitar:hover {
+    color: var(--peligro);
+}
+
+.carrito_sin_items {
+    font-size: 13px;
+    color: var(--texto-tenue);
+    text-align: center;
+    padding: 8px 0;
+}
+
+.barra_total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-top: 1px solid var(--borde);
+}
+
+.barra_total h3 {
+    font-size: 15px;
+    color: var(--texto);
+    font-weight: 500;
+}
+
+.monto_total {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: var(--fuente-mono);
+    color: var(--acento);
+}
+/* Fin Carrito */
+
+/* Main/Principal - grilla de productos */
+
+.grilla_productos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: var(--borde);
+    border: 1px solid var(--borde);
+    margin: 32px 0;
+}
+
+.item {
+    border-radius: 0;
+    border: none;
+    background-color: var(--superficie);
+    overflow: hidden;
+    transition: background-color .2s;
+    border-left: 2px solid transparent;
+}
+
+.item:hover {
+    background-color: var(--superficie-2);
+    border-left: 2px solid var(--acento);
+}
+
+.item figure {
+    overflow: hidden;
+    background-color: var(--superficie-3);
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform .5s;
+    filter: grayscale(0.15);
+}
+
+.item:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0);
+}
+
+.datos_producto {
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.datos_producto h2 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--texto);
+    line-height: 1.4;
+}
+
+.precio {
+    font-size: 19px;
+    font-weight: 700;
+    font-family: var(--fuente-mono);
+    color: var(--acento);
+}
+
+.datos_producto button {
+    border: 1px solid var(--borde-fuerte);
+    background-color: transparent;
+    color: var(--texto);
+    padding: 11px 10px;
+    cursor: pointer;
+    border-radius: 0;
+    font-family: var(--fuente-display);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background-color .15s, border-color .15s, color .15s;
+}
+
+.datos_producto button:hover {
+    background-color: var(--acento);
+    border-color: var(--acento);
+    color: var(--acento-texto);
+}
+
+.filtros {
+    display: flex;
+    gap: 8px;
+    margin: 1rem 0 1.5rem;
+}
+
+.btn_filtro {
+    padding: 7px 18px;
+    border-radius: 0;
+    border: 1px solid var(--borde-fuerte);
+    background: transparent;
+    color: var(--texto-suave);
+    font-family: var(--fuente-display);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.btn_filtro:hover {
+    border-color: var(--acento);
+    color: var(--texto);
+}
+
+.btn_filtro.btn_filtro--activo {
+    background: var(--acento);
+    color: var(--acento-texto);
+    border-color: var(--acento);
+}
+
+.item.oculto {
+    display: none;
+}
+/*Fin Main*/
+
+/* Diseño Footer */
+
+.pie_pagina {
+    margin-top: 64px;
+    background-color: var(--superficie);
+    color: var(--texto-suave);
+    border-radius: 0;
+    border-top: 1px solid var(--borde);
+    padding: 44px 40px 22px;
+}
+
+.pie_columnas {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.pie_marca h3 {
+    color: var(--texto);
+    font-size: 18px;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+}
+
+.pie_marca p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--texto-tenue);
+    max-width: 240px;
+}
+
+.pie_col h4 {
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--texto-tenue);
+    margin-bottom: 14px;
+}
+
+.pie_col a,
+.pie_col p {
+    display: block;
+    font-size: 13px;
+    color: var(--texto-suave);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color .2s;
+}
+
+.pie_col a:hover {
+    color: var(--acento);
+}
+
+.pie_copy {
+    padding-top: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--texto-tenue);
+}
+/*Vario su tamaño dependiendo del tamaño de la pantalla utilizando Media Query o @Media*/
+@media (max-width: 768px) {
+    .pie_columnas {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .pie_columnas {
+        grid-template-columns: 1fr;
+    }
+}
+/*Diseño de paginas*/
+
+/* Nav*/
+
+.logo_enlace {
+    /*Saco el subrayado del link sobre el nombre*/
+    text-decoration: none;
+    color: var(--texto);
+    cursor: pointer;
+    transition: opacity .2s;
+    letter-spacing: 0.01em;
+    /*Si se quiere que el cursor ni detecte el link de puede hacer:
+    cursor: default;
+    */
+}
+
+.logo_enlace:hover {
+    opacity: 0.7;
+}
+/*Diseño del Nav*/
+.nav_menu {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+
+.nav_item {
+    text-decoration: none;
+    font-size: 13px;
+    font-family: var(--fuente-display);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--texto-tenue);
+    transition: color .2s;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+.nav_item:hover {
+    color: var(--texto);
+}
+
+.nav_item.active {
+    color: var(--texto);
+    border-bottom-color: var(--acento);
+}
+/*Fin Diseño Nav*/
+
+/*Diseño de la pagina*/
+.contenido_pagina {
+    padding: 48px 0 72px;
+    flex: 1;
+}
+
+.encabezado_seccion {
+    text-align: center;
+    margin-bottom: 52px;
+}
+/*Linea marcadora de pagina actual*/
+.etiqueta_seccion {
+    display: inline-block;
+    font-family: var(--fuente-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--acento);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.titulo_seccion {
+    font-size: 36px;
+    font-family: var(--fuente-display);
+    color: var(--texto);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+
+.subtitulo_seccion {
+    font-size: 15px;
+    color: var(--texto-tenue);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+/*Fin Diseño de la pagina*/
+
+/*Formato formulario*/
+
+.layout_contacto {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 48px;
+    align-items: start;
+}
+
+/*Diseño Formulario*/
+
+.formulario_contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 0;
+    padding: 36px;
+}
+
+.fila_campos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.campo_grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo_grupo label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+}
+
+.etiqueta_opcional {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--texto-tenue);
+    font-size: 11px;
+}
+
+.campo_grupo input,
+.campo_grupo select,
+.campo_grupo textarea {
+    padding: 11px 14px;
+    border: 1px solid var(--borde-fuerte);
+    border-radius: 0;
+    font-family: var(--fuente-display);
+    font-size: 14px;
+    color: var(--texto);
+    background-color: var(--superficie-2);
+    transition: border-color .2s, background-color .2s;
+    outline: none;
+}
+
+.campo_grupo input::placeholder,
+.campo_grupo textarea::placeholder {
+    color: var(--texto-tenue);
+}
+
+.campo_grupo input:focus,
+.campo_grupo select:focus,
+.campo_grupo textarea:focus {
+    border-color: var(--acento);
+    background-color: var(--superficie-3);
+}
+
+.campo_grupo input.campo_con_error,
+.campo_grupo select.campo_con_error,
+.campo_grupo textarea.campo_con_error {
+    border-color: var(--peligro);
+    background-color: var(--peligro-fondo);
+}
+
+.campo_grupo.grupo_con_error label {
+    color: var(--peligro);
+}
+
+.campo_grupo textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.mensaje_error {
+    font-size: 11px;
+    color: var(--peligro);
+    min-height: 14px;
+}
+
+.btn_enviar {
+    border: 1px solid var(--acento);
+    background-color: var(--acento);
+    color: var(--acento-texto);
+    padding: 14px 20px;
+    cursor: pointer;
+    border-radius: 0;
+    font-family: var(--fuente-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background-color .15s, color .15s;
+    align-self: flex-start;
+    min-width: 180px;
+}
+
+.btn_enviar:hover {
+    background-color: transparent;
+    color: var(--acento);
+}
+
+.btn_enviar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.opciones_radio {
+    display: flex;
+    gap: 20px;
+    margin-top: 2px;
+}
+
+.opcion_radio,
+.opcion_checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--texto-suave);
+    cursor: pointer;
+}
+
+.opcion_radio input,
+.opcion_checkbox input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--acento);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+/* Fin diseño de Formulario*/
+
+/* Tarjetas de informacion  */
+
+.info_lateral {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tarjeta_info {
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 0;
+    padding: 18px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: border-color .2s;
+}
+
+.tarjeta_info:hover {
+    border-color: var(--borde-fuerte);
+}
+
+.icono_info {
+    width: 36px;
+    height: 36px;
+    background-color: var(--acento-suave);
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--acento);
+}
+
+.icono_info svg {
+    width: 17px;
+    height: 17px;
+}
+
+.tarjeta_info h4 {
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--texto-tenue);
+    margin-bottom: 4px;
+}
+
+.tarjeta_info p {
+    font-size: 13px;
+    color: var(--texto);
+    line-height: 1.5;
+}
+/* Fin tartejas de informacion  */
+
+/* Diseño Toast/Notificacion */
+
+.toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--superficie);
+    border: 1px solid var(--acento);
+    color: var(--texto);
+    padding: 14px 22px;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    transition: opacity .3s, transform .3s;
+    z-index: 100;
+}
+
+.toast svg {
+    color: var(--acento);
+}
+
+.toast--oculto {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(12px);
+}
+/* Fin toast  */
+
+/* Diseño preguntas y respuestas */
+
+.layout_faq {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.categorias_faq {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn_categoria {
+    padding: 8px 18px;
+    border: 1px solid var(--borde-fuerte);
+    border-radius: 0;
+    background: var(--superficie);
+    font-family: var(--fuente-display);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.btn_categoria:hover {
+    border-color: var(--acento);
+    color: var(--texto);
+}
+
+.btn_categoria.active {
+    background-color: var(--acento);
+    border-color: var(--acento);
+    color: var(--acento-texto);
+}
+
+.lista_faq {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--borde);
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--superficie);
+}
+
+.pregunta_item {
+    border-bottom: 1px solid var(--borde);
+}
+
+.pregunta_item:last-child {
+    border-bottom: none;
+}
+
+.pregunta_boton {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 20px 24px;
+    font-family: var(--fuente-display);
+    font-size: 14px;
+    color: var(--texto-suave);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: background-color .2s, color .2s;
+}
+
+.pregunta_boton:hover {
+    background-color: var(--superficie-2);
+    color: var(--texto);
+}
+
+.pregunta_boton.open {
+    color: var(--acento);
+    background-color: var(--superficie-2);
+}
+
+.icono_chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform .25s;
+    opacity: 0.45;
+}
+
+.pregunta_boton.open .icono_chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+    color: var(--acento);
+}
+
+.respuesta {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease, padding .3s ease;
+    padding: 0 24px;
+    background-color: var(--superficie-2);
+}
+
+.respuesta.open {
+    max-height: 300px;
+    padding: 0 24px 20px;
+}
+
+.respuesta p {
+    font-size: 14px;
+    color: var(--texto-suave);
+    line-height: 1.7;
+}
+/*Fin Preguntas Y Respuestas*/
+
+/* Boton "Escribinos" al final del FAQ(CTA) */
+
+.bloque_cta {
+    text-align: center;
+    margin-top: 48px;
+    padding: 36px;
+    border: 1px solid var(--borde);
+    border-radius: 0;
+    background: var(--superficie);
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bloque_cta p {
+    font-size: 15px;
+    color: var(--texto-suave);
+    margin-bottom: 16px;
+}
+
+.btn_accion {
+    display: inline-block;
+    text-decoration: none;
+    background-color: var(--acento);
+    color: var(--acento-texto);
+    padding: 12px 28px;
+    border-radius: 0;
+    font-family: var(--fuente-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--acento);
+    transition: background-color .15s, color .15s;
+}
+
+.btn_accion:hover {
+    background-color: transparent;
+    color: var(--acento);
+}
+/*Fin boton CTA*/
+
+
+@media (max-width: 768px) {
+    .layout_contacto {
+        grid-template-columns: 1fr;
+    }
+
+    .fila_campos {
+        grid-template-columns: 1fr;
+    }
+
+    .nav_menu {
+        gap: 16px;
+    }
+
+    .titulo_seccion {
+        font-size: 26px;
+    }
+}
+
+/* Seccion principal o "Hero" del home */
+
+.hero {
+    background: linear-gradient(135deg, var(--superficie) 0%, var(--superficie-3) 100%);
+    border: 1px solid var(--borde);
+    border-left: 2px solid var(--acento);
+    border-radius: 0;
+    padding: 64px 48px;
+    color: var(--texto);
+}
+
+.hero_contenido {
+    max-width: 560px;
+}
+
+.hero .etiqueta_seccion {
+    color: var(--acento);
+}
+
+.hero_titulo {
+    font-size: 34px;
+    font-family: var(--fuente-display);
+    margin-bottom: 16px;
+    line-height: 1.25;
+    color: var(--texto);
+}
+
+.hero_subtitulo {
+    font-size: 15px;
+    color: var(--texto-suave);
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.hero_botones {
+    display: flex;
+    gap: 14px;
+}
+
+.btn_accion--secundario {
+    background-color: transparent;
+    border: 1px solid var(--borde-fuerte);
+    color: var(--texto);
+}
+
+.btn_accion--secundario:hover {
+    background-color: var(--superficie-2);
+    border-color: var(--texto-suave);
+    color: var(--texto);
+}
+
+/* Productos Destacados (home) */
+
+.grilla_destacados {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: var(--borde);
+    border: 1px solid var(--borde);
+}
+
+.tarjeta_destacada {
+    text-decoration: none;
+    color: inherit;
+    border-radius: 0;
+    border: none;
+    border-left: 2px solid transparent;
+    overflow: hidden;
+    background: var(--superficie);
+    transition: background-color .2s;
+}
+
+.tarjeta_destacada:hover {
+    background-color: var(--superficie-2);
+    border-left: 2px solid var(--acento);
+}
+
+.tarjeta_destacada figure {
+    background-color: var(--superficie-3);
+    overflow: hidden;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.tarjeta_destacada img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform .5s;
+    filter: grayscale(0.15);
+}
+
+.tarjeta_destacada:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0);
+}
+
+.info_destacado {
+    padding: 14px 18px 18px;
+}
+
+.info_destacado h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: var(--texto);
+    font-weight: 500;
+}
+
+.info_destacado .precio {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Catalogo Productos */
+
+.lista_catalogo {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 900px;
+    margin: 0 auto;
+    border: 1px solid var(--borde);
+}
+
+.fila_catalogo {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    background: var(--superficie);
+    border: none;
+    border-bottom: 1px solid var(--borde);
+    border-radius: 0;
+    padding: 18px;
+    transition: background-color .15s;
+}
+
+.lista_catalogo .fila_catalogo:last-child {
+    border-bottom: none;
+}
+
+.fila_catalogo:hover {
+    background-color: var(--superficie-2);
+}
+
+.fila_catalogo img {
+    width: 100%;
+    height: 90px;
+    object-fit: contain;
+    background-color: var(--superficie-3);
+    padding: 8px;
+    border-radius: 0;
+    filter: grayscale(0.15);
+}
+
+.etiqueta_categoria {
+    display: inline-block;
+    font-family: var(--fuente-mono);
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--acento);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.datos_catalogo h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: var(--texto);
+    font-weight: 500;
+}
+
+.descripcion_catalogo {
+    font-size: 13px;
+    color: var(--texto-tenue);
+    line-height: 1.5;
+}
+
+.precio_y_accion {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.precio_y_accion .precio {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.precio_y_accion button {
+    border: 1px solid var(--borde-fuerte);
+    background-color: transparent;
+    color: var(--texto);
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 0;
+    font-family: var(--fuente-display);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background-color .15s, border-color .15s, color .15s;
+    white-space: nowrap;
+}
+
+.precio_y_accion button:hover {
+    background-color: var(--acento);
+    border-color: var(--acento);
+    color: var(--acento-texto);
+}
+
+/* Ofertas -  Precios Tachados*/
+
+.etiqueta_descuento {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: var(--peligro);
+    color: #fff;
+    font-family: var(--fuente-mono);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 0;
+    z-index: 2;
+}
+
+.grilla_productos .item {
+    position: relative;
+}
+
+.precios_con_descuento {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.precio_tachado {
+    font-size: 13px;
+    font-family: var(--fuente-mono);
+    color: var(--texto-tenue);
+    text-decoration: line-through;
+}
+
+/* Diseño pagina Nosotros */
+
+.layout_nosotros {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.bloque_texto {
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 0;
+    padding: 28px 32px;
+}
+
+.bloque_texto h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: var(--texto);
+}
+
+.bloque_texto p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--texto-suave);
+}
+
+.grilla_valores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: var(--borde);
+    border: 1px solid var(--borde);
+}
+
+.tarjeta_valor {
+    background: var(--superficie);
+    border: none;
+    border-radius: 0;
+    padding: 22px;
+    text-align: center;
+}
+
+.tarjeta_valor h4 {
+    font-family: var(--fuente-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--acento);
+    margin-bottom: 8px;
+}
+
+.tarjeta_valor p {
+    font-size: 13px;
+    color: var(--texto-suave);
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .grilla_destacados,
+    .grilla_valores {
+        grid-template-columns: 1fr;
+    }
+
+    .fila_catalogo {
+        grid-template-columns: 80px 1fr;
+    }
+
+    .precio_y_accion {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hero {
+        padding: 40px 24px;
+    }
+
+    .hero_titulo {
+        font-size: 24px;
+    }
+}
+/* Fin pagina Nosotros */
+
+/* Calculadora de envío (Contacto) */
+
+.calculadora_envio {
+    max-width: 760px;
+    margin: 64px auto 0;
+}
+
+.panel_calculadora {
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 0;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.controles_envio {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.controles_envio select,
+.controles_envio input {
+    padding: 11px 14px;
+    border: 1px solid var(--borde-fuerte);
+    border-radius: 0;
+    font-family: var(--fuente-display);
+    font-size: 14px;
+    color: var(--texto);
+    background-color: var(--superficie-2);
+}
+
+.controles_envio .btn_enviar {
+    align-self: flex-start;
+    min-width: 0;
+    margin-top: 4px;
+}
+
+.resultado_envio {
+    background-color: var(--superficie-2);
+    border-radius: 0;
+    border: 1px solid var(--borde);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    min-height: 160px;
+}
+
+.resultado_vacio {
+    font-size: 13px;
+    color: var(--texto-tenue);
+    text-align: center;
+}
+
+.fila_resultado {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 14px;
+    color: var(--texto-suave);
+}
+
+.fila_resultado strong {
+    font-size: 18px;
+    font-family: var(--fuente-mono);
+    color: var(--acento);
+}
+
+.nota_resultado {
+    font-size: 12px;
+    color: var(--texto-tenue);
+    line-height: 1.5;
+    border-top: 1px solid var(--borde);
+    padding-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .panel_calculadora {
+        grid-template-columns: 1fr;
+    }
+}
